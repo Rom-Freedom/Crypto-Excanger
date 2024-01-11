@@ -1,33 +1,46 @@
 <template>
   <h1>Crypto</h1>
-  <Input :changeAmount="changeAmount" :convert="convert" />
+  <Input :changeAmount="changeAmount" :convert="convert" :favorite="favorite"/>
   <p className="outputErr" v-if="error != ''">{{ error }}</p>
   <p className="outputRes" v-if="result != 0">{{ result }}</p>
+  <Favorite :favs="favs" v-if="favs.length > 0" :getFromFavs="getFromFavs"/>
   <div className="selectors">
-    <Selector :setCrypto="setcryptoFirst" />
-    <Selector :setCrypto="setcryptoSecond" />
+    <Selector :setCrypto="setcryptoFirst" :cryptoNow="cryptoFirst" />
+    <Selector :setCrypto="setcryptoSecond" :cryptoNow="cryptoSecond" />
   </div>
 </template>
 
 <script>
 import Input from './components/Input.vue'
 import Selector from './components/Selector.vue'
+import Favorite from './components/Favorite.vue'
 import CryptoConvert from 'crypto-convert';
 
 const convert = new CryptoConvert(/*options?*/);
 
 export default {
-  components: { Input, Selector },
+  components: { Input, Selector, Favorite },
   data() {
     return {
       amount: 0,
       cryptoFirst: '',
       cryptoSecond: '',
       error: '',
-      result: 0
+      result: 0,
+      favs: []
     }
   },
   methods: {
+    favorite() {
+      this.favs.push({
+        from: this.cryptoFirst,
+        to: this.cryptoSecond
+      });
+    },
+    getFromFavs(index) {
+      this.cryptoFirst = this.favs[index].from
+      this.cryptoSecond = this.favs[index].to
+    },
     changeAmount(val) {
       this.amount = val
     },

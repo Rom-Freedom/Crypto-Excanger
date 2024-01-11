@@ -2,6 +2,7 @@
     <div className="input-div">
         <input className="input-field" min="0" type="number" @input="changeAmount($event.target.value)" placeholder="Enter a number">
         <button className="convert-button" @click="convert()">Convert</button>
+        <button className="favorit-button" @click="favorite()">Add to favorities</button>
     </div>
 </template>
 
@@ -13,6 +14,10 @@
                 required: true
             },
             convert: {
+                type: Function,
+                required: true
+            },
+            favorite: {
                 type: Function,
                 required: true
             }
@@ -50,8 +55,23 @@
     text-transform: uppercase;
     position: absolute;
     top: 30px;
+    right: 790px;
     margin: 0 auto;
     padding: 15px 20px;
     width: 150px;
+}
+.favorit-button {
+    color: #fff;
+    cursor: pointer;
+    background: #1a032d;
+    border: 0;
+    border-radius: 3px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 30px;
+    right: 385px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    width: 180px; 
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <ul className="list-currencies">
-        <li className="currency-name" @click="selectItem('BTC')" :className="current == 'BTC' ? 'active' : ''">Bitcoin</li>
-        <li className="currency-name" @click="selectItem('ETH')" :className="current == 'ETH' ? 'active' : ''">ETH</li>
-        <li className="currency-name" @click="selectItem('USDT')" :className="current == 'USDT' ? 'active' : ''">USDT</li>
+        <li className="currency-name" @click="setCrypto('BTC')" :className="cryptoNow == 'BTC' ? 'active' : ''">Bitcoin</li>
+        <li className="currency-name" @click="setCrypto('ETH')" :className="cryptoNow == 'ETH' ? 'active' : ''">ETH</li>
+        <li className="currency-name" @click="setCrypto('USDT')" :className="cryptoNow == 'USDT' ? 'active' : ''">USDT</li>
     </ul>
 </template>
 
@@ -12,19 +12,12 @@
             setCrypto: {
                 type: Function,
                 required: true
+            },
+            cryptoNow: {
+                type: String,
+                required: true
             }
         },
-        data() {
-            return {
-                current: ''
-            }
-        },
-        methods: {
-           selectItem(val) {
-            this.setCrypto(val);
-            this.current = val;
-           } 
-        }
     }
 </script>
 
